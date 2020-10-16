@@ -15,9 +15,12 @@
     <meta name="author" content="Manabu Yanagihara">
     <title>LaMeMo</title>
     <link rel="icon" type="image/png" href="lamemoIcon.png">
-    <link rel="stylesheet" href="module/bootstrap-4.1.1/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css">
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css"
+        type="text/css" media="all" />
     <link rel="stylesheet" href="css/draft.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -39,13 +42,15 @@
                 });
         });
     </script>
-    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_HTMLorMML'></script>
+    <script type='text/javascript'
+        src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_HTMLorMML'></script>
 </head>
 
 <body id="fullscreen">
     <nav class="navbar navbar-expand-lg navbar-light bg-info navbar-inverse fixed-top">
         <a class="navbar-brand">LaMeMo</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -70,7 +75,8 @@
                 <a class="navbar-text mr-sm-3" title="Enter Fullscreen" href="#" id="requestfullscreen">
                     <i class="fas fa-expand-arrows-alt" area-hidden="true"></i>
                 </a>
-                <a class="navbar-text mr-sm-3" title="Exit Fullscreen" href="#" id="exitfullscreen" style="display: none">
+                <a class="navbar-text mr-sm-3" title="Exit Fullscreen" href="#" id="exitfullscreen"
+                    style="display: none">
                     <i class="fa fa-compress" area-hidden="true"></i>
                 </a>
                 <a class="navbar-text mr-sm-3" title="Insert LaTeX Command" href="#" id="insertLatexCommand">
@@ -94,7 +100,8 @@
             <div id="input-col" class="col-lg-6 col-md-8 text-center">
                 <form>
                     <div class="form-group">
-                        <textarea class="form-control" id="msg" placeholder="Writing and thinking creates work creative."></textarea>
+                        <textarea class="form-control" id="msg"
+                            placeholder="Writing and thinking creates work creative."></textarea>
                     </div>
                 </form>
             </div>
@@ -111,7 +118,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">
-                        <i class="fas fa-mouse-pointer fa-fw faa-vertical animated" style="color: grey"></i>Add LaTeX command by clicking.</h5>
+                        <i class="fas fa-mouse-pointer fa-fw faa-vertical animated" style="color: grey"></i>Add LaTeX
+                        command by clicking.</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -124,12 +132,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="emojiModal" tabindex="-1" role="dialog" aria-labelledby="emojiModalLabel" aria-hidden="true">
+    <div class="modal fade" id="emojiModal" tabindex="-1" role="dialog" aria-labelledby="emojiModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="emojiModalLabel">
-                        <i class="fas fa-mouse-pointer fa-fw faa-vertical animated" style="color: grey"></i>Add an icon by clicking.</h5>
+                        <i class="fas fa-mouse-pointer fa-fw faa-vertical animated" style="color: grey"></i>Add an icon
+                        by clicking.</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -142,12 +152,14 @@
         </div>
     </div>
 
-    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-md" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="confirmModalLabel">
-                        <i class="fas fa-exclamation-circle fa-fw faa-flash animated" style="color: red"></i>Warning</h5>
+                        <i class="fas fa-exclamation-circle fa-fw faa-flash animated" style="color: red"></i>Warning
+                    </h5>
                 </div>
                 <div class="modal-body">Delete the browser's local storage.</div>
                 <div class="modal-footer">
