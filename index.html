@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <meta property="og:title" content="LaMeMo">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="LaTeXコマンドでメモを残せるWebアプリ">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="LaTeXコマンドでメモを残せるWebアプリ">
+
+    <meta name="author" content="Manabu Yanagihara">
+    <title>LaMeMo</title>
+    <link rel="icon" type="image/png" href="lamemoIcon.png">
+    <link rel="stylesheet" href="module/bootstrap-4.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome-animation/0.0.10/font-awesome-animation.css" type="text/css" media="all" />
+    <link rel="stylesheet" href="css/draft.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="module/bootstrap-4.1.1/dist/js/bootstrap.min.js"></script>
+
+    <script type="text/x-mathjax-config">
+        $(function() {
+            var fontname = localStorage.getItem('webFont');
+  
+            if (!fontname) {
+                fontname = "TeX";
+            }
+
+            MathJax.Hub.Config(
+                {
+                    showProcessingMessages: false,
+                    "HTML-CSS": { availableFonts: [], webFont: fontname },
+                    tex2jax: { inlineMath: [['$','$'],['\\(','\\)']] }
+                });
+        });
+    </script>
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_HTMLorMML'></script>
+</head>
+
+<body id="fullscreen">
+    <nav class="navbar navbar-expand-lg navbar-light bg-info navbar-inverse fixed-top">
+        <a class="navbar-brand">LaMeMo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link SELECT-SHEET" data-sheet="1" href="#">Sheet 1
+                        <span class="sr-only"></span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link SELECT-SHEET" data-sheet="2" href="#">2</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link SELECT-SHEET" data-sheet="3" href="#">3</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav my-2 my-lg-0">
+                <a class="navbar-text mr-sm-3" title="Change Math Font" id="CHANGE-FONT" href="#"></a>
+                <a class="navbar-text mr-sm-3" title="Toggle Preview" id="TOGGLE-PREVIEW" href="#">
+                    <i class="fa fa-columns" aria-hidden="true"></i>
+                </a>
+                <a class="navbar-text mr-sm-3" title="Enter Fullscreen" href="#" id="requestfullscreen">
+                    <i class="fas fa-expand-arrows-alt" area-hidden="true"></i>
+                </a>
+                <a class="navbar-text mr-sm-3" title="Exit Fullscreen" href="#" id="exitfullscreen" style="display: none">
+                    <i class="fa fa-compress" area-hidden="true"></i>
+                </a>
+                <a class="navbar-text mr-sm-3" title="Insert LaTeX Command" href="#" id="insertLatexCommand">
+                    <i class="fas fa-code" area-hidden="true" data-toggle="modal" data-target="#addMathPartsModal"></i>
+                </a>
+                <a class="navbar-text mr-sm-3" title="Open Emoji Modal" href="#" id="emoji">
+                    <i class="far fa-smile" area-hidden="true" data-toggle="modal" data-target="#emojiModal"></i>
+                </a>
+                <a class="navbar-text mr-sm-3" title="Download" href="#" id="downloadTexFile">
+                    <i class="fas fa-cloud-download-alt" area-hidden="true"></i>
+                </a>
+                <a class="navbar-text mr-sm-3" title="Delete All LocalStorage" href="#" id="deleteLocalStorage">
+                    <i class="far fa-trash-alt" area-hidden="true" data-toggle="modal" data-target="#confirmModal"></i>
+                </a>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <div id="input-output-row" class="row" style="display:none;">
+            <div id="input-col" class="col-lg-6 col-md-8 text-center">
+                <form>
+                    <div class="form-group">
+                        <textarea class="form-control" id="msg" placeholder="Writing and thinking creates work creative."></textarea>
+                    </div>
+                </form>
+            </div>
+            <div id="output-col" class="col-lg-6 col-md-4">
+                <div id="output-preview" style="width:100%;"></div>
+                <div id="output-buffer" style="width:100%;visibility:hidden; position:absolute; top:0; left: 0"></div>
+                <div id="canvas-div"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="addMathPartsModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-mouse-pointer fa-fw faa-vertical animated" style="color: grey"></i>Add LaTeX command by clicking.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="emojiModal" tabindex="-1" role="dialog" aria-labelledby="emojiModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="emojiModalLabel">
+                        <i class="fas fa-mouse-pointer fa-fw faa-vertical animated" style="color: grey"></i>Add an icon by clicking.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="confirmModal" tabindex="-1" role="dialog" aria-labelledby="confirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="confirmModalLabel">
+                        <i class="fas fa-exclamation-circle fa-fw faa-flash animated" style="color: red"></i>Warning</h5>
+                </div>
+                <div class="modal-body">Delete the browser's local storage.</div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-outline-danger" data-dismiss="modal">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(function () {
+            autosize($('#msg'));
+        });
+    </script>
+    <script type="text/javascript" src="js/emoji.js"></script>
+    <script type="text/javascript" src="js/draft.js"></script>
+    <script type="text/javascript" src="js/autosize.js"></script>
+    <script type="text/javascript" src="js/latexCommand.js"></script>
+    <script type="text/javascript" src="js/download.js"></script>
+    <script type="text/javascript" src="js/jquery.fullscreen.min.js"></script>
+    <script>
+        $(function () {
+            if (!$.fullscreen.isNativelySupported()) {
+                $('#requestfullscreen').hide();
+                $('#exitfullscreen').hide();
+            }
+            $('#requestfullscreen').click(function () {
+                $('#fullscreen').fullscreen();
+                $('#msg').focus();
+                return false;
+            });
+            $('#exitfullscreen').click(function () {
+                $.fullscreen.exit();
+                $('#msg').focus();
+                return false;
+            });
+            $(document).bind('fscreenchange', function (e, state, elem) {
+                if ($.fullscreen.isFullScreen()) {
+                    $('#requestfullscreen').hide();
+                    $('#exitfullscreen').show();
+                } else {
+                    $('#requestfullscreen').show();
+                    $('#exitfullscreen').hide();
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>

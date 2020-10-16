@@ -1,0 +1,93 @@
+body {
+  padding-top: 70px;
+}
+
+textarea#msg {
+  font-family: 'Inconsolata', "Hiragino Mincho ProN";
+  font-size: 15px;
+  line-height: 150%;
+  padding: 0.4em;
+  max-width: 2000px;
+  width:100%;
+  height:160vh;
+  outline: none;
+  border: none;
+}
+
+span.MathJax {
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+span.mtext,b {
+  font-family: 'Inconsolata', "Hiragino Kaku Gothic ProN";
+}
+
+strong {
+  color: #800000;
+  font-family: 'Inconsolata', "Hiragino Kaku Gothic ProN";
+}
+
+div#output-col {
+  border-left: 1px dotted gray;
+}
+
+p#output, div#output-preview, div#output-buffer {
+  font-family: 'Inconsolata', "Hiragino Mincho ProN";
+  background-color: white;
+  font-size: 15px;
+  line-height: 150%;
+  outline: none;
+  padding: 0.4em;
+  white-space:pre-line;
+  /* resize: both; */
+  overflow: auto;
+  border: 1px white solid;
+}
+
+blockquote {
+  padding: 0.4em;
+  border: 1px dotted gray;
+  border-radius: 7px;
+}
+
+pre {
+  font-family: 'Inconsolata', "Hiragino Kaku Gothic ProN";
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
+}
+
+.navbar-inverse .navbar-nav > li > a:hover {
+  color: white;
+}
+.navbar-inverse .navbar-nav > li > a.empty-sheet:hover {
+  color: white;
+}
+
+.navbar-inverse .navbar-nav > li > a.current-sheet {
+  color: royalblue;
+  background-color: paleturquoise;
+  pointer-events: none;
+}
+
+#emojiModal .modal-dialog {
+  overflow-y: initial !important
+}
+
+#emojiModal .modal-body {
+  height: 300px;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
+
+#addMathPartsModal .modal-dialog {
+  overflow-y: initial !important
+}
+
+#addMathPartsModal .modal-body {
+  height: 300px;
+  overflow-y: auto;
+  word-wrap: break-word;
+}
